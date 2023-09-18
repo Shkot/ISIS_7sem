@@ -1,11 +1,11 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cmath>
 #include <vector>
-using namespace std;
+#include <locale>
 
 class Vector {
 private:
-    vector<double> data;
+    std::vector<double> data;
     int size;
 
 public:
@@ -20,19 +20,19 @@ public:
     // Метод для заполнения вектора
     void fillVector() {
         for (int i = 0; i < size; i++) {
-            cin >> data[i];
+            std::cin >> data[i];
         }
     }
 
     // Метод для вывода вектора и его нормы
     void printVector() {
         for (int i = 0; i < size; i++) {
-            cout << data[i] << " ";
+            std::cout << data[i] << " ";
         }
     }
     void printNorm() {
         double norm = calculateNorm();
-        cout << "norma= " << norm << endl;
+        std::cout << "norma= " << norm << std::endl;
     }
 
     // Метод для вычисления евклидовой нормы
@@ -41,7 +41,7 @@ public:
         for (int i = 0; i < size; i++) {
             sum += data[i] * data[i];
         }
-        return sqrt(sum);
+        return std::sqrt(sum);
     }
 
     // Метод для сложения двух векторов
@@ -92,10 +92,10 @@ public:
 
 int main() {
     // Устанавливаем русскую локаль
-    locale::global(locale(""));
+    std::locale::global(std::locale(""));
 
     int size;
-    cin >> size;
+    std::cin >> size;
 
     Vector vector1(size);
     Vector vector2(size);
@@ -104,49 +104,49 @@ int main() {
     vector2.fillVector();
 
     double scalar;
-    cin >> scalar;
+    std::cin >> scalar;
 
     // Вывод результатов
-    cout << "vector1= ";
+    std::cout << "vector1= ";
     vector1.printVector();
     vector1.printNorm();
 
-    cout << "vector2= ";
+    std::cout << "vector2= ";
     vector2.printVector();
     vector2.printNorm();
 
     Vector sum = vector1.add(vector2);
-    cout << "summa= ";
+    std::cout << "summa= ";
     sum.printVector();
-    cout << endl;
+    std::cout << std::endl;
 
     Vector difference = vector1.subtract(vector2);
-    cout << "raznost= ";
+    std::cout << "raznost= ";
     difference.printVector();
-    cout << endl;
+    std::cout << std::endl;
 
     double dotProduct = vector1.scalarProduct(vector2);
-    cout << "scalar= " << dotProduct << endl;
+    std::cout << "scalar= " << dotProduct << std::endl;
 
     Vector scaledVector1 = vector1.multiplyByScalar(scalar);
-    cout << "mult chislo * Vector1= ";
+    std::cout << "mult chislo * Vector1= ";
     scaledVector1.printVector();
-    cout << endl;
+    std::cout << std::endl;
 
     Vector scaledVector2 = vector2.multiplyByScalar(scalar);
-    cout << "mult chislo * Vector2= ";
+    std::cout << "mult chislo * Vector2= ";
     scaledVector2.printVector();
-    cout << endl;
+    std::cout << std::endl;
 
     int comparison = vector1.compareByNorm(vector2);
     if (comparison == 0) {
-        cout << "norma(Vector1) = norma(Vector2)" << endl;
+        std::cout << "norma(Vector1) = norma(Vector2)" << std::endl;
     }
     else if (comparison < 0) {
-        cout << "norma(Vector1) < norma(Vector2)" << endl;
+        std::cout << "norma(Vector1) < norma(Vector2)" << std::endl;
     }
     else {
-        cout << "norma(Vector1) > norma(Vector2)" << endl;
+        std::cout << "norma(Vector1) > norma(Vector2)" << std::endl;
     }
 
     return 0;
