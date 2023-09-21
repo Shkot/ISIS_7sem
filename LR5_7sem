@@ -1,0 +1,130 @@
+#include <iostream>
+#include <cmath>
+#include <vector>
+
+double geometricMeanOfNonZeroElements(const std::vector<double>& arr) {
+    if (arr.empty()) {
+        throw std::invalid_argument("Массив пуст.");
+    }
+
+    double product = 1.0;
+    int nonZeroCount = 0;
+
+    for (double element : arr) {
+        if (element == 0.0) {
+            continue;
+        }
+        product *= element;
+        nonZeroCount++;
+    }
+
+    if (nonZeroCount == 0) {
+        throw std::invalid_argument("В массиве нет ненулевых элементов.");
+    }
+
+    return std::pow(product, 1.0 / nonZeroCount);
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    int n;
+    std::cout << "Введите размер массива: ";
+    std::cin >> n;
+
+    std::vector<double> arr(n);
+
+    std::cout << "Введите элементы массива:\n";
+    for (int i = 0; i < n; i++) {
+        std::cin >> arr[i];
+    }
+
+    try {
+        double result = geometricMeanOfNonZeroElements(arr);
+        std::cout << "Среднегеометрическое значение ненулевых элементов: " << result << std::endl;
+    }
+    catch (const std::invalid_argument& e) {
+        std::cerr << "Ошибка: " << e.what() << std::endl;
+    }
+
+    return 0;
+}
+
+/*
+#include <iostream>
+#include <cmath>
+#include <vector>
+#include <stdexcept>
+
+double geometricMeanOfNonZeroElements(const std::vector<double>& arr) {
+    if (arr.empty()) {
+        throw std::invalid_argument("Массив пуст.");
+    }
+
+    double product = 1.0;
+    int nonZeroCount = 0;
+
+    for (double element : arr) {
+        if (element == 0.0) {
+            continue;
+        }
+        product *= element;
+        nonZeroCount++;
+    }
+
+    if (nonZeroCount == 0) {
+        throw std::invalid_argument("В массиве нет ненулевых элементов.");
+    }
+
+    return std::pow(product, 1.0 / nonZeroCount);
+}
+
+void testGeometricMeanOfNonZeroElements() {
+    // Тест 1: Проверка для массива с одним ненулевым элементом
+    std::vector<double> arr1 = { 5.0 };
+    double result1 = geometricMeanOfNonZeroElements(arr1);
+    if (std::abs(result1 - 5.0) > 1e-6) {
+        std::cerr << "Ошибка в тесте 1" << std::endl;
+    }
+
+    // Тест 2: Проверка для массива с несколькими ненулевыми элементами
+    std::vector<double> arr2 = { 2.0, 4.0, 8.0 };
+    double result2 = geometricMeanOfNonZeroElements(arr2);
+    if (std::abs(result2 - 4.0) > 1e-6) {
+        std::cerr << "Ошибка в тесте 2" << std::endl;
+    }
+
+    // Тест 3: Проверка для массива, где все элементы равны 0
+    std::vector<double> arr3 = { 0.0, 0.0, 0.0 };
+    try {
+        geometricMeanOfNonZeroElements(arr3);
+        // Должно возникнуть исключение, так как нет ненулевых элементов
+        std::cerr << "Ошибка в тесте 3" << std::endl;
+    }
+    catch (const std::invalid_argument& e) {
+        if (std::string(e.what()) != "В массиве нет ненулевых элементов.") {
+            std::cerr << "Ошибка в тесте 3" << std::endl;
+        }
+    }
+
+    // Тест 4: Проверка для пустого массива
+    std::vector<double> arr4;
+    try {
+        geometricMeanOfNonZeroElements(arr4);
+        // Должно возникнуть исключение, так как массив пуст
+        std::cerr << "Ошибка в тесте 4" << std::endl;
+    }
+    catch (const std::invalid_argument& e) {
+        if (std::string(e.what()) != "Массив пуст.") {
+            std::cerr << "Ошибка в тесте 4" << std::endl;
+        }
+    }
+}
+
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    testGeometricMeanOfNonZeroElements();
+    std::cout << "Тесты завершены." << std::endl;
+    return 0;
+}
+*/
