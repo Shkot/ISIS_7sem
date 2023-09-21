@@ -1,0 +1,103 @@
+///*
+#include <iostream>
+// Функция для выполнения последовательного поиска элемента в массиве
+int sequentialSearch(int arr[], int n, int key) {
+    for (int i = 0; i < n; ++i) {
+        if (arr[i] == key) {
+            return i; // Элемент найден, возвращаем его индекс
+        }
+    }
+    return -1; // Элемент не найден, возвращаем -1
+}
+
+// Функция для выполнения тестов
+void runTests() {
+    // Тест на нахождение существующего элемента
+    int arr1[] = { 3, 7, 1, 9, 5 };
+    int n1 = sizeof(arr1) / sizeof(arr1[0]);
+    int key1 = 7;
+    int result1 = sequentialSearch(arr1, n1, key1);
+    if (result1 == 1) {
+        std::cout << "Тест 1 пройден: Элемент 7 найден на позиции 1." << std::endl;
+    }
+    else {
+        std::cout << "Тест 1 не пройден: Ожидалось 1, получено " << result1 << "." << std::endl;
+    }
+
+    // Тест на нахождение несуществующего элемента
+    int arr2[] = { 3, 7, 1, 9, 5 };
+    int n2 = sizeof(arr2) / sizeof(arr2[0]);
+    int key2 = 4;
+    int result2 = sequentialSearch(arr2, n2, key2);
+    if (result2 == -1) {
+        std::cout << "Тест 2 пройден: Элемент 4 не найден в массиве." << std::endl;
+    }
+    else {
+        std::cout << "Тест 2 не пройден: Ожидалось -1, получено " << result2 << "." << std::endl;
+    }
+
+    // Тест на пустой массив
+    int arr3[] = {}; // Пустой массив
+    int n3 = 0;
+    int key3 = 42; // Любой ключ, так как массив пуст
+    int result3 = sequentialSearch(arr3, n3, key3);
+    if (result3 == -1) {
+        std::cout << "Тест 3 пройден: Элемент не найден в пустом массиве." << std::endl;
+    }
+    else {
+        std::cout << "Тест 3 не пройден: Ожидалось -1, получено " << result3 << "." << std::endl;
+    }
+}
+
+int main() {
+    runTests(); // Запуск тестов
+    return 0;
+}
+//*/
+
+/*
+#include <iostream>
+
+// Функция для выполнения последовательного поиска элемента в массиве
+int sequentialSearch(int arr[], int n, int key) {
+    for (int i = 0; i < n; ++i) {
+        if (arr[i] == key) {
+            return i; // Элемент найден, возвращаем его индекс
+        }
+    }
+    return -1; // Элемент не найден, возвращаем -1
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian"); // Установка локали для поддержки русского языка
+
+    int n; // Количество элементов в массиве
+    std::cout << "Введите количество элементов в массиве: ";
+    std::cin >> n;
+
+    int *arr = new int[n]; // Создаем динамический массив
+
+    // Заполняем массив элементами
+    std::cout << "Введите элементы массива:\n";
+    for (int i = 0; i < n; ++i) {
+        std::cin >> arr[i];
+    }
+
+    int key; // Элемент, который мы ищем
+    std::cout << "Введите элемент, который хотите найти: ";
+    std::cin >> key;
+
+    int result = sequentialSearch(arr, n, key); // Вызываем функцию поиска
+
+    if (result != -1) {
+        std::cout << "Элемент " << key << " найден на позиции " << result << std::endl;
+    } else if (n == 0) {
+        std::cout << "Массив пустой. Элемент не найден." << std::endl;
+    } else {
+        std::cout << "Элемент " << key << " не найден в массиве." << std::endl;
+    }
+
+    delete[] arr; // Освобождаем память, выделенную для массива
+    return 0;
+}
+*/
